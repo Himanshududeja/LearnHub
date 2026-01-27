@@ -8,10 +8,6 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          {/* Add more routes here as needed */}
-          {/* <Route path="/login" element={<Login />} /> */}
-          {/* <Route path="/register" element={<Register />} /> */}
-          {/* <Route path="/courses" element={<CourseCatalog />} /> */}
         </Routes>
       </div>
     </Router>

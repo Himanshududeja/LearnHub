@@ -2,153 +2,102 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Courses', href: '#courses' },
-    { name: 'Features', href: '#features' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white shadow-lg py-4'
-          : 'bg-transparent py-6'
+    <nav 
+      className={`fixed w-full z-50 transition-all duration-500 ${
+        scrolled ? 'bg-[#14141f]/95 backdrop-blur-xl border-b border-[#00ff88]/20' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-2 rounded-lg">
-              <svg
-                className="w-8 h-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="relative">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#00ff88] to-[#00d4ff] flex items-center justify-center">
+                <span className="font-['JetBrains_Mono'] font-bold text-[#0a0a0f] text-xl">{'<>'}</span>
+              </div>
+              <div className="absolute inset-0 bg-[#00ff88] opacity-0 group-hover:opacity-20 blur-xl transition-opacity"></div>
             </div>
-            <span
-              className={`text-2xl font-bold ${
-                isScrolled ? 'text-gray-900' : 'text-white'
-              }`}
-            >
-              LearnHub
-            </span>
+            <div className="flex flex-col">
+              <span className="font-['Syne'] font-extrabold text-2xl text-white tracking-tight">NEXUS</span>
+              <span className="font-['JetBrains_Mono'] text-[10px] text-[#00ff88] tracking-[0.2em] -mt-1">LEARNING.SYS</span>
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`text-sm font-medium transition-colors ${
-                  isScrolled
-                    ? 'text-gray-700 hover:text-indigo-600'
-                    : 'text-white hover:text-indigo-200'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
+          {/* Desktop Nav */}
+          <div className="hidden lg:flex items-center gap-12">
+            <a href="#features" className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider">
+              Features
+            </a>
+            <a href="#courses" className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider">
+              Courses
+            </a>
+            <a href="#stats" className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider">
+              Stats
+            </a>
+            <a href="#about" className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider">
+              About
+            </a>
           </div>
 
           {/* Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/login"
-              className={`px-6 py-2 text-sm font-medium rounded-lg transition-all ${
-                isScrolled
-                  ? 'text-gray-700 hover:text-indigo-600'
-                  : 'text-white hover:text-indigo-200'
-              }`}
+          <div className="hidden lg:flex items-center gap-4">
+            <Link 
+              to="/login" 
+              className="font-['JetBrains_Mono'] text-sm text-white hover:text-[#00ff88] transition-colors uppercase tracking-wider px-6 py-3"
             >
               Login
             </Link>
-            <Link
-              to="/register"
-              className="px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
+            <Link 
+              to="/register" 
+              className="relative font-['JetBrains_Mono'] text-sm bg-[#00ff88] text-[#0a0a0f] px-6 py-3 uppercase tracking-wider font-bold overflow-hidden group"
             >
-              Sign Up
+              <span className="relative z-10">Sign Up</span>
+              <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg"
+          <button 
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 group"
           >
-            <svg
-              className={`w-6 h-6 ${isScrolled ? 'text-gray-900' : 'text-white'}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            <span className={`w-6 h-0.5 bg-[#00ff88] transition-all ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`w-6 h-0.5 bg-[#00ff88] transition-all ${mobileOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`w-6 h-0.5 bg-[#00ff88] transition-all ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 bg-white rounded-lg shadow-lg">
-            <div className="flex flex-col space-y-2 p-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-700 hover:text-indigo-600 py-2 text-sm font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="pt-4 space-y-2">
-                <Link
-                  to="/login"
-                  className="block w-full text-center px-6 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 border border-gray-300 rounded-lg"
-                >
+        {mobileOpen && (
+          <div className="lg:hidden pb-8 border-t border-[#00ff88]/20 mt-2">
+            <div className="flex flex-col gap-6 mt-6">
+              <a href="#features" className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider">
+                Features
+              </a>
+              <a href="#courses" className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider">
+                Courses
+              </a>
+              <a href="#stats" className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider">
+                Stats
+              </a>
+              <a href="#about" className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider">
+                About
+              </a>
+              <div className="flex flex-col gap-3 pt-4 border-t border-[#00ff88]/20">
+                <Link to="/login" className="font-['JetBrains_Mono'] text-sm text-white hover:text-[#00ff88] transition-colors uppercase tracking-wider text-center py-3 border border-white/20">
                   Login
                 </Link>
-                <Link
-                  to="/register"
-                  className="block w-full text-center px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg"
-                >
+                <Link to="/register" className="font-['JetBrains_Mono'] text-sm bg-[#00ff88] text-[#0a0a0f] uppercase tracking-wider font-bold text-center py-3">
                   Sign Up
                 </Link>
               </div>
