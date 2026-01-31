@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import FloatingShapes3D from './FloatingShapes3D';
 
 const HeroSection = () => {
   const [loaded, setLoaded] = useState(false);
@@ -19,10 +20,8 @@ const HeroSection = () => {
         style={{ background: 'var(--gradient-mesh)' }}
       ></div>
 
-      {/* Floating Geometric Shapes */}
-      <div className="absolute top-20 left-[10%] w-32 h-32 border-2 border-[#00ff88] opacity-40 animate-float"></div>
-      <div className="absolute bottom-40 right-[15%] w-48 h-48 border-2 border-[#ff0088] opacity-40 animate-float" style={{ animationDelay: '1s' }}></div>
-      <div className="absolute top-1/3 right-[5%] w-24 h-24 border-2 border-[#00d4ff] opacity-40 animate-float" style={{ animationDelay: '2s' }}></div>
+      {/* Floating Geometric Shapes with Three.js */}
+      <FloatingShapes3D />
 
       {/* Scan Line Effect */}
       <div className="absolute inset-0 scan-line pointer-events-none"></div>
@@ -56,7 +55,7 @@ const HeroSection = () => {
           >
             Initialize Learning →
           </Link>
-          <a 
+          <a
             href="#courses"
             className="btn-secondary w-full sm:w-auto"
           >
