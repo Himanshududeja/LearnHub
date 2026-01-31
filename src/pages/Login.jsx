@@ -316,7 +316,16 @@ const Login = () => {
           </div>
 
           {/* Sign Up Link */}
-          <div className="text-center">
+          <div className="text-center mt-6">
+            <Link
+              to="/forgot-password"
+              className="font-['JetBrains_Mono'] text-sm text-[#a0a0b8] hover:text-[#00ff88] transition-colors uppercase tracking-wider"
+            >
+              Forgot Password?
+            </Link>
+          </div>
+
+          <div className="text-center mt-4">
             <span className="font-['DM_Sans'] text-[#a0a0b8]">New to the system? </span>
             <Link
               to="/register"
